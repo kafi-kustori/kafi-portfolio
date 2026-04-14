@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kafi | RUET CSE '22 | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+        
+        h1, h2, h3 {
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+        
+        .glass { 
+            background: rgba(15, 23, 42, 0.92); 
+            backdrop-filter: blur(24px); 
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass.scrolled {
+            backdrop-filter: blur(40px);
+            box-shadow: 0 10px 30px -10px rgb(59 130 246 / 0.4);
+            border-bottom-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .hero-bg { 
+            background: linear-gradient(135deg, #0a0a1f 0%, #1a1a3a 100%);
+            animation: gradientShift 18s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .star-field {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .star-field .stars1,
+        .star-field .stars2,
+        .star-field .stars3 {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: transparent;
+            animation: twinkle 6s linear infinite;
+        }
+        
+        .star-field .stars1 { background-image: radial-gradient(white 1px, transparent 0); background-size: 80px 80px; opacity: 0.35; animation-duration: 7s; }
+        .star-field .stars2 { background-image: radial-gradient(white 1px, transparent 0); background-size: 120px 120px; opacity: 0.25; animation-duration: 10s; }
+        .star-field .stars3 { background-image: radial-gradient(white 1.5px, transparent 0); background-size: 200px 200px; opacity: 0.2; animation-duration: 14s; }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.85; }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .profile-container {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-22px); }
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(to right, #3b82f6, #10b981);
+            transition: width 0.4s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .ach-card {
+            background: #1a2333;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 
+                        0 0 0 1px rgba(59, 130, 246, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ach-card::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(90deg, #3b82f6, #10b981, #8b5cf6, #3b82f6);
+            background-size: 400% 400%;
+            z-index: -1;
+            filter: blur(12px);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: neonSweep 5s linear infinite;
+        }
+        
+        .ach-card:hover::before {
+            opacity: 0.85;
+        }
+        
+        @keyframes neonSweep {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .ach-card:hover { 
+            transform: translateY(-8px) scale(1.03); 
+            box-shadow: 0 30px 40px -10px rgb(59 130 246 / 0.25),
+                        0 0 25px -5px rgb(59 130 246 / 0.3);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
+        }
+        
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            background: linear-gradient(45deg, #3b82f6, #10b981, #3b82f6);
+            border-radius: 9999px;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.6;
+            animation: profileGlow 6s ease infinite;
+        }
+        
+        @keyframes profileGlow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.9; }
+        }
+        
+        .linkedin-glow {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .linkedin-glow:hover {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.7),
+                        0 0 40px rgba(59, 130, 246, 0.4);
+            transform: scale(1.06);
+        }
+        
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: rippleAnim 0.7s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes rippleAnim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        .timeline-line {
+            position: relative;
+        }
+        
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 8px;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #3b82f6, #10b981);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+        
+        .timeline-line.draw::before {
+            transform: scaleY(1);
+        }
+        
+        .skill-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            width: 64px;
+            height: 3px;
+            background: linear-gradient(to right, #3b82f6, #10b981);
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 9999px;
+        }
+        
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .skills-card {
+            background: #1e2937;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        .skills-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px -12px rgb(59 130 246 / 0.25);
+        }
+    </style>
+</head>
+<body class="bg-[#020617] text-slate-300">
+
+    <!-- NAV BAR -->
+    <nav id="navbar" class="fixed top-0 w-full glass z-50 border-b border-slate-700">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="text-3xl font-bold text-white flex items-center gap-1">
+                    Kafi<span class="text-blue-500">.</span>
+                    <span class="text-xs bg-gradient-to-r from-blue-400 to-emerald-400 px-2 py-px rounded-full text-white font-medium tracking-widest text-[10px] mt-1">CSE '22</span>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#experience" class="nav-link hover:text-white transition-colors">Experience</a>
+                <a href="#projects" class="nav-link hover:text-white transition-colors">Projects</a>
+                <a href="#journey" class="nav-link hover:text-white transition-colors">Journey</a>
+                <a href="#skills" class="nav-link hover:text-white transition-colors">Skills</a>
+                <a href="#contact" class="nav-link hover:text-white transition-colors">Contact</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="assets/cv.pdf" download="Abdullah_Hal_Kafi_Nafees_CV.pdf"
+                   class="bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 px-6 py-2.5 rounded-3xl text-white font-semibold text-sm flex items-center gap-2 transition-all shadow-xl shadow-blue-600/40 hover:shadow-2xl hover:shadow-emerald-500/30">
+                    <i class="fas fa-download"></i> Get My CV
+                </a>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-slate-300 hover:text-white transition-all">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-t border-slate-700 px-6 py-4">
+            <div class="flex flex-col gap-4 text-sm font-medium">
+                <a href="#experience" class="hover:text-white py-2 transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-white py-2 transition-colors">Projects</a>
+                <a href="#journey" class="hover:text-white py-2 transition-colors">Journey</a>
+                <a href="#skills" class="hover:text-white py-2 transition-colors">Skills</a>
+                <a href="#contact" class="hover:text-white py-2 transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-bg min-h-screen pt-28 pb-20 px-6 flex items-center">
+        <div class="star-field">
+            <div class="stars1"></div>
+            <div class="stars2"></div>
+            <div class="stars3"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center relative z-10">
+            <div class="md:col-span-7" data-aos="fade-up">
+                <div class="inline-flex items-center gap-2 bg-blue-600/10 text-blue-400 px-6 py-2 rounded-3xl text-sm font-medium mb-8 backdrop-blur-md border border-blue-400/20">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-400"></span>
+                    </span>
+                    RUET CSE • Batch '22
+                </div>
+                <h1 class="text-6xl md:text-7xl font-extrabold gradient-text leading-none tracking-tighter mb-6">
+                    Abdullah Hal Kafi Nafees
+                </h1>
+                <p class="text-2xl md:text-3xl text-slate-300 mb-8">
+                    Building mobile apps that solve <span class="text-blue-400 font-semibold">real problems</span> &amp; gain real users
+                </p>
+                <p class="text-lg text-slate-400 max-w-lg mb-10 leading-relaxed">
+                    An App Developer crafting impactful mobile solutions that users actually love.<br>
+                    A Visual Storyteller creating engaging tech content, app reviews &amp; professional video editing.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" onclick="createRipple(event, this)"
+                       class="ripple-btn bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 text-white px-8 py-4 rounded-3xl font-semibold flex items-center gap-3 transition-all text-lg shadow-xl shadow-blue-500/40">
+                        <i class="fas fa-rocket"></i> View My Projects
+                    </a>
+                    <a href="https://www.linkedin.com/in/abdullah-hal-kafi-nafees-0948b220a/" target="_blank" onclick="createRipple(event, this)"
+                       class="ripple-btn linkedin-glow border border-slate-400 hover:border-white px-8 py-4 rounded-3xl font-medium flex items-center gap-3 transition-all text-lg">
+                        <i class="fab fa-linkedin"></i> Connect on LinkedIn
+                    </a>
+                </div>
+            </div>
+            <div class="md:col-span-5 flex justify-center md:justify-end" data-aos="fade-left">
+                <div class="profile-container">
+                    <div class="w-80 h-80 md:w-96 md:h-96 rounded-3xl overflow-hidden border-8 border-slate-700 shadow-2xl shadow-blue-500/20">
+                        <img src="assets/profile.jpg" alt="Abdullah Hal Kafi Nafees" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 bg-emerald-500 text-white text-sm font-bold px-6 py-3 rounded-3xl shadow-xl flex items-center gap-2">
+                        <i class="fas fa-check-circle animate-pulse"></i> Open to Opportunities
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION - NOW WITH 3 CARDS -->
+    <section id="experience" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- RUET Computing Society -->
+            <div class="ach-card p-8" data-aos="fade-up">
+                <div class="flex items-start gap-4">
+                    <img src="assets/RUET Computing Society.jpg" alt="RUET Computing Society" class="w-14 h-14 rounded-2xl object-cover border border-slate-700">
+                    <div class="flex-1">
+                        <h3 class="text-white text-2xl font-semibold">RUET Computing Society</h3>
+                        <p class="text-blue-400 font-medium mb-4">Founding Member</p>
+                        <ul class="text-slate-400 space-y-3 text-sm">
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-500 mt-1"></i><span>Co-founded the first Development &amp; AI/ML community alongside seniors (Initiated by our '22 series).</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-500 mt-1"></i><span>Established and fully managed the official LinkedIn &amp; Facebook pages from scratch.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-500 mt-1"></i><span>Executed offline marketing &amp; crafted promotional videos using CapCut Pro &amp; Adobe Premiere Pro.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RUET Cyber Security Club -->
+            <div class="ach-card p-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-start gap-4">
+                    <img src="assets/rcsc.jpg" alt="RUET Cyber Security Club" class="w-14 h-14 rounded-2xl object-cover border border-slate-700">
+                    <div class="flex-1">
+                        <h3 class="text-white text-2xl font-semibold">RUET Cyber Security Club</h3>
+                        <p class="text-purple-400 font-medium mb-4">Executive Member / Creative Director</p>
+                        <ul class="text-slate-400 space-y-3 text-sm">
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-purple-500 mt-1"></i><span>Led visual branding and offline marketing campaigns.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-purple-500 mt-1"></i><span>Designed engaging social media posts, pitch decks, and creatives using Canva Pro.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-purple-500 mt-1"></i><span>Gained hands-on technical knowledge in Kali Linux, Cryptography, and OSINT.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-trophy text-amber-400 mt-1"></i><span>Secured <strong class="text-emerald-400">2nd Position from RUET</strong> in Brunner CTF 2025 with team RUET_NASA_Hackers — 134th globally (2545 points)</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW: Physics Saviour & Udvash -->
+            <div class="ach-card p-8" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-start gap-4">
+                    <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-users text-4xl text-emerald-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-white text-2xl font-semibold">Physics Saviour &amp; Udvash</h3>
+                        <p class="text-emerald-400 font-medium mb-4">Community Manager &amp; Mentor</p>
+                        <ul class="text-slate-400 space-y-3 text-sm">
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-400 mt-1"></i><span>Managed a massive education-focused online community of <strong class="text-white">20,000+</strong> members.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-400 mt-1"></i><span>Conducted outreach, daily engagement, and strategic content planning.</span></li>
+                            <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-400 mt-1"></i><span>Worked as a Script Evaluator &amp; QnA Teacher, ensuring academic accountability.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <span class="text-blue-400 font-medium tracking-widest">FEATURED</span>
+            <h2 class="text-4xl font-bold text-white mt-2 section-header">RUET Smart Connect</h2>
+        </div>
+        <div class="bg-gradient-to-br from-blue-900/30 to-slate-900 border border-blue-500/30 rounded-3xl p-12 md:p-16 relative overflow-hidden" data-aos="fade-up">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="px-4 py-1 bg-blue-500 text-white text-sm font-medium rounded-2xl">Flutter</span>
+                        <span class="px-4 py-1 bg-amber-500 text-white text-sm font-medium rounded-2xl">Firebase</span>
+                        <span class="px-4 py-1 bg-emerald-500 text-white text-sm font-medium rounded-2xl">Dart</span>
+                    </div>
+                    <h3 class="text-4xl font-bold text-white mb-4">A complete campus management solution</h3>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-8">
+                        Centralized platform for event management, notice distribution, and real-time updates at RUET. 
+                        Role-based access, push notifications, and beautiful UI for students &amp; admins.
+                    </p>
+                    <div class="flex items-center gap-2 text-emerald-400 text-base font-medium mb-6">
+                        <i class="fas fa-thumbs-up"></i>
+                        Generated a great impression • Received great appreciation from LinkedIn community &amp; teachers
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://github.com/kafi-kustori/RUET_Connect" target="_blank" class="inline-flex items-center gap-2 text-white bg-slate-800 hover:bg-white hover:text-slate-900 px-8 py-4 rounded-2xl font-semibold transition-all">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/posts/abdullah-hal-kafi-nafees-0948b220a_ruet-campuslife-studentlife-activity-7361435988541292544-ERTB" target="_blank" class="inline-flex items-center gap-2 text-white bg-[#0a66c2] hover:bg-[#004182] px-8 py-4 rounded-2xl font-semibold transition-all">
+                            <i class="fab fa-linkedin"></i> View LinkedIn Post
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="assets/project_screen.png" alt="RUET Smart Connect Screenshot" class="rounded-3xl shadow-2xl border border-slate-700 w-full transition-all hover:scale-[1.03]">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey -->
+    <section id="journey" class="py-24 bg-[#020617] border-t border-slate-800/50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-blue-400 font-medium tracking-widest uppercase">My Path</span>
+                <h2 class="text-4xl font-bold text-white mt-2 section-header">Educational Road Journey</h2>
+            </div>
+            <div class="relative timeline-line ml-3 md:ml-6 space-y-16">
+                <div class="relative pl-8 md:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1 h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center ring-4 ring-[#020617]">
+                        <i class="fas fa-university text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Rajshahi University of Engineering & Technology (RUET)</h3>
+                    <p class="text-blue-400 font-medium mt-1 mb-4">B.Sc. in CSE • CGPA: 3.69 (till 4th semester)</p>
+                    <ul class="text-slate-400 space-y-3 text-sm bg-[#1a2333] p-6 rounded-2xl border border-slate-700">
+                        <li class="flex items-start gap-2"><i class="fas fa-arrow-right text-blue-500 mt-1"></i><span>Joined and contributed to clubs where I met amazing seniors and deep-dived into the world of Cyber Security.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-arrow-right text-blue-500 mt-1"></i><span>Currently an <strong class="text-slate-200">Executive Member at RUET Cyber Security Club</strong>, contributing to the design team and participating in global CTFs.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-arrow-right text-blue-500 mt-1"></i><span>One of the <strong class="text-slate-200">Founding Executive Members of RUET Computing Society</strong>.</span></li>
+                    </ul>
+                </div>
+                <div class="relative pl-8 md:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1 h-8 w-8 rounded-full bg-emerald-500 flex items-center justify-center ring-4 ring-[#020617]">
+                        <i class="fas fa-building text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Dhaka College</h3>
+                    <p class="text-emerald-400 font-medium mt-1 mb-4">HSC (2020-2022) • GPA: 5.00</p>
+                    <ul class="text-slate-400 space-y-3 text-sm bg-[#1a2333] p-6 rounded-2xl border border-slate-700">
+                        <li class="flex items-start gap-2"><i class="fas fa-arrow-right text-emerald-500 mt-1"></i><span>Academically, I scored <strong class="text-slate-200">92.3%</strong> in HSC and earned a Govt. Board Scholarship.</span></li>
+                        <li class="flex items-start gap-2"><i class="fas fa-arrow-right text-emerald-500 mt-1"></i><span>Active member of Dhaka College Science Club.</span></li>
+                    </ul>
+                </div>
+                <div class="relative pl-8 md:pl-12" data-aos="fade-up">
+                    <div class="absolute -left-[17px] top-1 h-8 w-8 rounded-full bg-purple-500 flex items-center justify-center ring-4 ring-[#020617]">
+                        <i class="fas fa-school text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Birshreshtha Noor Mohammad Public College (BNMPC)</h3>
+                    <p class="text-purple-400 font-medium mt-1 mb-4">Jan 2009 – Apr 2020</p>
+                    <div class="bg-[#1a2333] p-6 rounded-2xl border border-slate-700">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-white font-semibold mb-2 border-b border-slate-600 pb-1">Academic Excellence:</h4>
+                                <ul class="text-slate-400 space-y-2 text-sm">
+                                    <li class="flex items-start gap-2"><i class="fas fa-star text-purple-400 mt-1 text-[10px]"></i><span><strong class="text-slate-200">Talentpool Scholarships</strong> in PSC (98.67%) &amp; JSC (Top scorer under Lalbagh Thana).</span></li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-star text-purple-400 mt-1 text-[10px]"></i><span>General Grade Scholarship in SSC (92.07%).</span></li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-star text-purple-400 mt-1 text-[10px]"></i><span>3 times Academic Excellence Awards (BD Police HQs).</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-2 border-b border-slate-600 pb-1">Extracurriculars:</h4>
+                                <ul class="text-slate-400 space-y-2 text-sm">
+                                    <li class="flex items-start gap-2"><i class="fas fa-trophy text-purple-400 mt-1 text-[10px]"></i><span><strong class="text-slate-200">National Winner</strong> – Bangladesh Physics Olympiad (Junior).</span></li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-trophy text-purple-400 mt-1 text-[10px]"></i><span>Regional Winner – BdMO &amp; BdPhO.</span></li>
+                                    <li class="flex items-start gap-2"><i class="fas fa-trophy text-purple-400 mt-1 text-[10px]"></i><span>Served as Class Captain.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE SKILLS & EXPERTISE -->
+    <section id="skills" class="py-20 px-6 max-w-6xl mx-auto bg-[#020617]">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-4xl font-bold text-white">Core Skills &amp; Expertise</h2>
+            <div class="w-16 h-1 bg-gradient-to-r from-blue-400 to-emerald-400 mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- App Dev & Backend -->
+            <div class="skills-card" data-aos="zoom-in">
+                <div class="flex items-center gap-3 mb-6">
+                    <img src="assets/flutter_icon.webp" alt="Flutter" class="h-9 w-9">
+                    <img src="assets/firebase icon.png" alt="Firebase" class="h-9 w-9">
+                </div>
+                <h3 class="text-white text-2xl font-semibold mb-1">App Dev &amp; Backend</h3>
+                <p class="text-blue-400 text-sm mb-6">Flutter • Dart • Firebase</p>
+                <ul class="space-y-4 text-slate-300">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                        Built <strong>RUET Smart Connect</strong> from scratch using Flutter.
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-blue-500 mt-1"></i>
+                        Integrated Firebase for real-time database, role-based access, and auth.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Graphic Design -->
+            <div class="skills-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="flex items-center gap-3 mb-6">
+                    <img src="assets/canva.jpg" alt="Canva" class="h-9 w-9 rounded-lg">
+                </div>
+                <h3 class="text-white text-2xl font-semibold mb-1">Graphic Design</h3>
+                <p class="text-purple-400 text-sm mb-6">Canva Pro • UI/UX Branding</p>
+                <ul class="space-y-4 text-slate-300">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-purple-500 mt-1"></i>
+                        Designed sponsorship pitch decks and official club event materials.
+                    </li>
+                </ul>
+                <a href="https://drive.google.com/drive/u/0/folders/1FoRzhj8t1iMCmUiAnZoA8Ar6jkxbJsUS" target="_blank"
+                   class="mt-8 inline-flex items-center justify-center w-full gap-2 bg-slate-800 hover:bg-purple-600 border border-slate-600 hover:border-purple-500 text-white px-6 py-3 rounded-2xl text-sm font-semibold transition-all">
+                    <i class="fas fa-image"></i> View Design Portfolio
+                </a>
+            </div>
+
+            <!-- Video Editing & Content Creation -->
+            <div class="skills-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="flex items-center gap-3 mb-6">
+                    <img src="assets/adobe-premiere-pro logo.webp" alt="Premiere Pro" class="h-9 w-9 rounded-lg">
+                    <img src="assets/capcut-logo.avif" alt="CapCut" class="h-9 w-9 rounded-full">
+                </div>
+                <h3 class="text-white text-2xl font-semibold mb-1">Video Editing &amp; Content Creation</h3>
+                <p class="text-red-400 text-sm mb-6">Premiere Pro • CapCut Pro • Tech Reviews</p>
+                <ul class="space-y-4 text-slate-300 mb-8">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-red-500 mt-1"></i>
+                        Edited promotional videos, orientation clips, and short-form Reels.
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-red-500 mt-1"></i>
+                        Creating weekly tech content: app/website reviews, AI tools &amp; online productivity tools.
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-red-500 mt-1"></i>
+                        Running “Kafi Kustori” content brand across YouTube, TikTok &amp; Facebook.
+                    </li>
+                </ul>
+
+                <div class="border-t border-slate-700 pt-6">
+                    <p class="text-xs uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                        KAFI KUSTORI CONTENT JOURNEY
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://www.youtube.com/@Abdullah_Hal_Kafi_Nafees" target="_blank"
+                           class="flex-1 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-3 rounded-2xl text-sm font-semibold transition-all">
+                            <i class="fab fa-youtube"></i> YouTube
+                        </a>
+                        <a href="https://www.tiktok.com/@kafi_kistori" target="_blank"
+                           class="flex-1 flex items-center justify-center gap-2 bg-pink-600 hover:bg-pink-700 text-white px-5 py-3 rounded-2xl text-sm font-semibold transition-all">
+                            <i class="fab fa-tiktok"></i> TikTok
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61585519238971" target="_blank"
+                           class="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl text-sm font-semibold transition-all">
+                            <i class="fab fa-facebook"></i> Facebook
+                        </a>
+                    </div>
+                </div>
+
+                <a href="https://drive.google.com/drive/u/0/folders/1y9q-DeqSp4O1aQ9apakFp-LCcBXIulZ5" target="_blank"
+                   class="mt-8 inline-flex items-center justify-center w-full gap-2 bg-slate-800 hover:bg-red-600 border border-slate-600 hover:border-red-500 text-white px-6 py-3 rounded-2xl text-sm font-semibold transition-all">
+                    <i class="fas fa-play-circle"></i> Watch Video Edits
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Stats -->
+    <div class="py-12 bg-slate-900 border-y border-slate-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="group">
+                    <div id="stat1" class="text-5xl font-bold text-blue-400 stat-number" data-count="100">0</div>
+                    <p class="text-slate-400 text-lg mt-1">Problems Solved</p>
+                </div>
+                <div class="group">
+                    <div id="stat2" class="text-5xl font-bold text-emerald-400 stat-number" data-count="2000">0</div>
+                    <p class="text-slate-400 text-lg mt-1">LinkedIn Connections</p>
+                </div>
+                <div class="group">
+                    <div id="stat3" class="text-5xl font-bold text-purple-400 stat-number" data-count="3.69">0</div>
+                    <p class="text-slate-400 text-lg mt-1">CGPA</p>
+                </div>
+                <div class="group">
+                    <div id="stat4" class="text-5xl font-bold text-amber-400 stat-number" data-count="3">0</div>
+                    <p class="text-slate-400 text-lg mt-1">Award Winner</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-16 bg-slate-950 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-2xl font-semibold text-white mb-2">Let’s build something great together</p>
+            <p class="text-slate-400 mb-8">Open for freelance, internships, collaboration, or content collaboration.</p>
+            <div class="flex justify-center gap-8 text-3xl mb-12">
+                <a href="https://github.com/kafi-kustori" target="_blank" class="hover:text-white transition-all hover:scale-110"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/abdullah-hal-kafi-nafees-0948b220a/" target="_blank" class="hover:text-blue-400 transition-all hover:scale-110"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61585519238971" target="_blank" class="hover:text-blue-600 transition-all hover:scale-110"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@Abdullah_Hal_Kafi_Nafees" target="_blank" class="hover:text-red-500 transition-all hover:scale-110"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@kafi_kistori" target="_blank" class="hover:text-pink-500 transition-all hover:scale-110"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/8801782207895" target="_blank" class="hover:text-green-400 transition-all hover:scale-110"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:kafikustori@gmail.com" class="hover:text-red-400 transition-all hover:scale-110"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="text-slate-500 text-sm">© 2026 Abdullah Hal Kafi Nafees • Made with passion in Rajshahi</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true, easing: 'ease-out-cubic' });
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        function createRipple(event, element) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            element.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 700);
+        }
+
+        const timelineLine = document.querySelector('.timeline-line');
+        if (timelineLine) {
+            new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) timelineLine.classList.add('draw');
+            }, { threshold: 0.4 }).observe(timelineLine);
+        }
+
+        function initTilt() {
+            document.querySelectorAll('.skill-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -8;
+                    const rotateY = ((rect.width / 2 - x) / (rect.width / 2)) * 8;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                });
+            });
+        }
+
+        function animateStats() {
+            const stats = [
+                { id: 'stat1', target: 100, suffix: '+' },
+                { id: 'stat2', target: 2000, suffix: '+' },
+                { id: 'stat3', target: 3.69, suffix: '', decimals: true },
+                { id: 'stat4', target: 3, suffix: 'x' }
+            ];
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const stat = stats.find(s => s.id === entry.target.id);
+                        if (!stat) return;
+                        let current = 0;
+                        const increment = stat.target / 45;
+                        const el = entry.target;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= stat.target) {
+                                current = stat.target;
+                                clearInterval(timer);
+                            }
+                            el.textContent = stat.decimals ? current.toFixed(2) : Math.floor(current) + stat.suffix;
+                        }, 25);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.7 });
+            stats.forEach(s => {
+                const el = document.getElementById(s.id);
+                if (el) observer.observe(el);
+            });
+        }
+
+        window.onload = () => {
+            initTilt();
+            animateStats();
+        };
+    </script>
+</body>
+</html>
