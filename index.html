@@ -259,7 +259,6 @@
 </head>
 <body class="bg-[#020617] text-slate-300">
 
-    <!-- NAV BAR -->
     <nav id="navbar" class="fixed top-0 w-full glass z-50 border-b border-slate-700">
         <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -276,9 +275,9 @@
                 <a href="#contact" class="nav-link hover:text-white transition-colors">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <a href="assets/cv.pdf" download="Abdullah_Hal_Kafi_Nafees_CV.pdf"
+                <a href="assets/cv.pdf" target="_blank"
                    class="bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 px-6 py-2.5 rounded-3xl text-white font-semibold text-sm flex items-center gap-2 transition-all shadow-xl shadow-blue-600/40 hover:shadow-2xl hover:shadow-emerald-500/30">
-                    <i class="fas fa-download"></i> Get My CV
+                    <i class="fas fa-eye"></i> View My CV
                 </a>
                 <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-slate-300 hover:text-white transition-all">
                     <i class="fas fa-bars" id="menu-icon"></i>
@@ -297,7 +296,6 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <section class="hero-bg min-h-screen pt-28 pb-20 px-6 flex items-center">
         <div class="star-field">
             <div class="stars1"></div>
@@ -348,11 +346,9 @@
         </div>
     </section>
 
-    <!-- EXPERIENCE SECTION - NOW WITH 3 CARDS -->
     <section id="experience" class="py-20 px-6 max-w-6xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <!-- RUET Computing Society -->
             <div class="ach-card p-8" data-aos="fade-up">
                 <div class="flex items-start gap-4">
                     <img src="assets/RUET Computing Society.jpg" alt="RUET Computing Society" class="w-14 h-14 rounded-2xl object-cover border border-slate-700">
@@ -368,7 +364,6 @@
                 </div>
             </div>
 
-            <!-- RUET Cyber Security Club -->
             <div class="ach-card p-8" data-aos="fade-up" data-aos-delay="100">
                 <div class="flex items-start gap-4">
                     <img src="assets/rcsc.jpg" alt="RUET Cyber Security Club" class="w-14 h-14 rounded-2xl object-cover border border-slate-700">
@@ -385,7 +380,6 @@
                 </div>
             </div>
 
-            <!-- NEW: Physics Saviour & Udvash -->
             <div class="ach-card p-8" data-aos="fade-up" data-aos-delay="200">
                 <div class="flex items-start gap-4">
                     <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -406,7 +400,6 @@
         </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects" class="py-20 px-6 max-w-6xl mx-auto">
         <div class="text-center mb-12" data-aos="fade-up">
             <span class="text-blue-400 font-medium tracking-widest">FEATURED</span>
@@ -445,7 +438,6 @@
         </div>
     </section>
 
-    <!-- Journey -->
     <section id="journey" class="py-24 bg-[#020617] border-t border-slate-800/50">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
@@ -507,7 +499,6 @@
         </div>
     </section>
 
-    <!-- CORE SKILLS & EXPERTISE -->
     <section id="skills" class="py-20 px-6 max-w-6xl mx-auto bg-[#020617]">
         <div class="text-center mb-12" data-aos="fade-up">
             <h2 class="text-4xl font-bold text-white">Core Skills &amp; Expertise</h2>
@@ -515,7 +506,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- App Dev & Backend -->
             <div class="skills-card" data-aos="zoom-in">
                 <div class="flex items-center gap-3 mb-6">
                     <img src="assets/flutter_icon.webp" alt="Flutter" class="h-9 w-9">
@@ -535,7 +525,6 @@
                 </ul>
             </div>
 
-            <!-- Graphic Design -->
             <div class="skills-card" data-aos="zoom-in" data-aos-delay="100">
                 <div class="flex items-center gap-3 mb-6">
                     <img src="assets/canva.jpg" alt="Canva" class="h-9 w-9 rounded-lg">
@@ -554,7 +543,6 @@
                 </a>
             </div>
 
-            <!-- Video Editing & Content Creation -->
             <div class="skills-card" data-aos="zoom-in" data-aos-delay="200">
                 <div class="flex items-center gap-3 mb-6">
                     <img src="assets/adobe-premiere-pro logo.webp" alt="Premiere Pro" class="h-9 w-9 rounded-lg">
@@ -606,7 +594,6 @@
         </div>
     </section>
 
-    <!-- Footer Stats -->
     <div class="py-12 bg-slate-900 border-y border-slate-800">
         <div class="max-w-6xl mx-auto px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -630,7 +617,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer id="contact" class="py-16 bg-slate-950 border-t border-slate-800">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <p class="text-2xl font-semibold text-white mb-2">Let’s build something great together</p>
