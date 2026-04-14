@@ -1,29 +1,17 @@
-# kafi-portfolio
-# 🚀 Modern Personal Portfolio | RCS Hackathon 2026
+# Kafi's Personal Portfolio 🚀
 
-[![Live Site](https://img.shields.io/badge/Live-Site-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://kafi-kustori.github.io/kafi-portfolio/)
+Welcome to my personal portfolio website! I am **Abdullah Hal Kafi Nafees**, an undergraduate student of Computer Science and Engineering (CSE) at **RUET** (Batch '22).
 
-A sleek, responsive personal portfolio built for the **RCS Internal Hackathon 2026**. This site showcases my journey as a CSE student, my projects, and my contributions to the tech community.
+This website is a brief showcase of my journey, skills, and projects. I am highly passionate about **Mobile App Development (Flutter)**, **Cybersecurity**, and **Visual Content Creation**. 
 
-## 📸 Preview
-![Portfolio Screenshot](assets/project_screen.png) 
-*(Note: You can add a full-page screenshot in the assets folder and link it here)*
+🔗 **[Visit My Live Website Here](https://kafi-kustori.github.io/kafi-portfolio/)**
 
-## ✨ Key Features
-* **Modern UI/UX**: Built with Tailwind CSS featuring a glassmorphism aesthetic and dark mode.
-* **Dynamic Animations**: Smooth scroll and reveal effects using the AOS (Animate On Scroll) library.
-* **Interactive Elements**: Real-time stats counter for problem-solving and social connections.
-* **Responsive Design**: Fully optimized for mobile, tablet, and desktop views.
+## 🛠️ Built With
+* HTML5
+* Tailwind CSS
+* Vanilla JavaScript
 
-## 🛠️ Tech Stack
-* **Frontend**: HTML5, Tailwind CSS.
-* **Interactions**: JavaScript (AOS Library, FontAwesome).
-* **Deployment**: Hosted via GitHub Pages.
-
-## 📂 Project Structure
-* `index.html`: Main structure and styling.
-* `assets/`: Contains images, icons, and professional documents like CV.
-* `README.md`: Project documentation.
-
-## 👤 About Me
-I am a Computer Science & Engineering student at **RUET (Batch '22)**. I specialize in Flutter app development and have a keen interest in Cybersecurity.
+## 📫 Let's Connect!
+* **LinkedIn:** [Abdullah Hal Kafi Nafees](https://www.linkedin.com/in/abdullah-hal-kafi-nafees-0948b220a/)
+* **GitHub:** [@kafi-kustori](https://github.com/kafi-kustori)
+* **YouTube:** [Kafi Kustori](https://www.youtube.com/@Abdullah_Hal_Kafi_Nafees)
